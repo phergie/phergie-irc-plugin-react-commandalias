@@ -121,16 +121,21 @@ class Plugin extends AbstractPlugin
      */
     public function forwardEvent($alias, $command, $eventName, Event $event, Queue $queue)
     {
+        $logger = $this->getLogger();
         $emitter = $this->getEventEmitter();
         $listeners = $emitter->listeners($eventName);
         if (!$listeners) {
-            $logger = $this->getLogger();
             $logger->warning('Alias references unknown command', array(
                 'alias' => $alias,
                 'command' => $command,
             ));
             return;
         }
+        $logger->debug('Forwarding event', array(
+            'event_name' => $eventName,
+            'alias' => $alias,
+            'command' => $command,
+        ));
         $emitter->emit($eventName, array($event, $queue));
     }
 }
