@@ -29,8 +29,10 @@ new \Phergie\Irc\Plugin\React\CommandAlias\Plugin(array(
     // All configuration is required
 
     'aliases' => array(
-        'alias1' => 'command1',
-        'alias2' => 'command2',
+        // alias => command
+        'j' => 'join',
+        'p' => 'part',
+        'q' => 'quit',
         // ...
     ),
 
