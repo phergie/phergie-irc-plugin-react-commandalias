@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0d89491a83b007ab0ab5431df112026f",
+    "hash": "7a061d6dc42d73ac06807a1150b75b1d",
     "packages": [
         {
             "name": "evenement/evenement",
@@ -353,24 +353,24 @@
         },
         {
             "name": "phergie/phergie-irc-plugin-react-command",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phergie/phergie-irc-plugin-react-command.git",
-                "reference": "3120bd0f9de71669e341e8c948056fe1a455202d"
+                "reference": "e20a2fc4520289fa4e7cda575c6b24ebf1d6b943"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phergie/phergie-irc-plugin-react-command/zipball/3120bd0f9de71669e341e8c948056fe1a455202d",
-                "reference": "3120bd0f9de71669e341e8c948056fe1a455202d",
+                "url": "https://api.github.com/repos/phergie/phergie-irc-plugin-react-command/zipball/e20a2fc4520289fa4e7cda575c6b24ebf1d6b943",
+                "reference": "e20a2fc4520289fa4e7cda575c6b24ebf1d6b943",
                 "shasum": ""
             },
             "require": {
                 "phergie/phergie-irc-bot-react": "dev-master"
             },
             "require-dev": {
-                "phake/phake": "2.0.0-beta2",
-                "phpunit/phpunit": "4.1.*"
+                "phake/phake": "1.0.*",
+                "phpunit/phpunit": "4.0.*"
             },
             "type": "library",
             "autoload": {
@@ -389,7 +389,7 @@
                 "plugin",
                 "react"
             ],
-            "time": "2014-05-05 23:16:42"
+            "time": "2014-04-20 18:43:07"
         },
         {
             "name": "psr/log",
@@ -1281,8 +1281,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "phergie/phergie-irc-bot-react": 20,
-        "phergie/phergie-irc-plugin-react-command": 20
+        "phergie/phergie-irc-bot-react": 20
     },
     "platform": [
 
