@@ -26,5 +26,10 @@
         "psr-4": {
             "Phergie\\Irc\\Plugin\\React\\CommandAlias\\": "src"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phergie\\Irc\\Tests\\Plugin\\React\\CommandAlias\\": "tests"
+        }
     }
 }

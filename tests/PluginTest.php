@@ -8,11 +8,12 @@
  * @package Phergie\Irc\Plugin\React\CommandAlias
  */
 
-namespace Phergie\Irc\Plugin\React\CommandAlias;
+namespace Phergie\Irc\Tests\Plugin\React\CommandAlias;
 
 use Phake;
-use Phergie\Irc\Plugin\React\Command\CommandEvent;
 use Phergie\Irc\Bot\React\EventQueueInterface;
+use Phergie\Irc\Plugin\React\CommandAlias\Plugin;
+use Phergie\Irc\Plugin\React\Command\CommandEvent;
 
 /**
  * Tests for the Plugin class.
