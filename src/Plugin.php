@@ -136,6 +136,8 @@ class Plugin extends AbstractPlugin
             'alias' => $alias,
             'command' => $command,
         ));
+        // Set the event customCommand to match the command being aliased
+        $event->setCustomCommand($command);
         $emitter->emit($eventName, array($event, $queue));
     }
 }

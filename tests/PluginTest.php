@@ -156,6 +156,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             $this->queue
         );
 
+        Phake::verify($this->event)->setCustomCommand("bar");
+
         Phake::verify($this->eventEmitter)->emit(
             $eventName,
             array($this->event, $this->queue)
