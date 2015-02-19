@@ -80,8 +80,7 @@ class Plugin extends AbstractPlugin
         $events = array();
         foreach ($this->aliases as $alias => $command) {
             $command = explode(' ', $command);
-            $eventName = $command[0];
-            unset($command[0]);
+            $eventName = array_shift($command);
             $customParameters = $command;
             $events['command.' . $alias] = $this->getEventCallback(
                 $alias,
