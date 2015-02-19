@@ -172,6 +172,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
     public function testForwardEventWithCustomParameters()
     {
         $eventName = 'command.bar';
+        $customParameters = array('parameter1', 'parameter2');
 
         Phake::when($this->eventEmitter)
                 ->listeners($eventName)
@@ -181,12 +182,12 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 'foo',
                 'bar',
                 $eventName,
-                array('foo', 'bar'),
+                $customParameters,
                 $this->event,
                 $this->queue
         );
 
-        Phake::verify($this->event)->setCustomParams(array('foo', 'bar'));
+        Phake::verify($this->event)->setCustomParams($customParameters);
 
         Phake::verify($this->eventEmitter)->emit(
                 $eventName,
