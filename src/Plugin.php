@@ -129,8 +129,12 @@ class Plugin extends AbstractPlugin
      */
     public function forwardEvent($alias, $command, $eventName, $customParameters, Event $event, Queue $queue)
     {
-        if (is_array($customParameters) && is_array($event->getCustomParams())) {
-            $event->setCustomParams(array_merge($customParameters, $event->getCustomParams()));
+        if (is_array($customParameters)) {
+            if (is_array($event->getCustomParams())) {
+                $event->setCustomParams(array_merge($customParameters, $event->getCustomParams()));
+            } else {
+                $event->setCustomParams($customParameters);
+            }
         }
         $logger = $this->getLogger();
         $emitter = $this->getEventEmitter();
