@@ -124,6 +124,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'foo',
             'bar',
             'command.foo',
+            array(),
             $this->event,
             $this->queue
         );
@@ -152,6 +153,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'foo',
             'bar',
             $eventName,
+            array(),
             $this->event,
             $this->queue
         );

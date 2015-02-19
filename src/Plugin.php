@@ -79,15 +79,21 @@ class Plugin extends AbstractPlugin
     {
         $events = array();
         foreach ($this->aliases as $alias => $command) {
+            $command = explode(' ', $command);
+            $eventName = $command[0];
+            unset($command[0]);
+            $customParameters = $command;
             $events['command.' . $alias] = $this->getEventCallback(
                 $alias,
-                $command,
-                'command.' . $command
+                $eventName,
+                'command.' . $eventName,
+                $customParameters
             );
             $events['command.' . $alias . '.help'] = $this->getEventCallback(
                 $alias,
-                $command,
-                'command.' . $command . '.help'
+                $eventName,
+                'command.' . $eventName . '.help',
+                $customParameters
             );
         }
         return $events;
@@ -99,13 +105,14 @@ class Plugin extends AbstractPlugin
      * @param string $alias
      * @param string $command
      * @param string $eventName
+     * @param array  $customParameters
      * @return callable
      */
-    protected function getEventCallback($alias, $command, $eventName)
+    protected function getEventCallback($alias, $command, $eventName, $customParameters)
     {
         $self = $this;
-        return function(Event $event, Queue $queue) use ($self, $alias, $command, $eventName) {
-            $self->forwardEvent($alias, $command, $eventName, $event, $queue);
+        return function(Event $event, Queue $queue) use ($self, $alias, $command, $eventName, $customParameters) {
+            $self->forwardEvent($alias, $command, $eventName, $customParameters, $event, $queue);
         };
     }
 
@@ -116,11 +123,15 @@ class Plugin extends AbstractPlugin
      * @param string $alias
      * @param string $command
      * @param string $eventName
+     * @param array  $customParameters
      * @param \Phergie\Irc\Plugin\React\Command\CommandEvent $event
      * @param \Phergie\Irc\Bot\React\EventQueueInterface $queue
      */
-    public function forwardEvent($alias, $command, $eventName, Event $event, Queue $queue)
+    public function forwardEvent($alias, $command, $eventName, $customParameters, Event $event, Queue $queue)
     {
+        if (is_array($customParameters) && is_array($event->getCustomParams())) {
+            $event->setCustomParams(array_merge($customParameters, $event->getCustomParams()));
+        }
         $logger = $this->getLogger();
         $emitter = $this->getEventEmitter();
         $listeners = $emitter->listeners($eventName);
