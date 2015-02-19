@@ -33,6 +33,7 @@ new \Phergie\Irc\Plugin\React\CommandAlias\Plugin(array(
         'j' => 'join',
         'p' => 'part',
         'q' => 'quit',
+        'btc' => 'wolfram-alpha 1 BTC in US$',
         // ...
     ),
 

@@ -124,6 +124,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'foo',
             'bar',
             'command.foo',
+            array(),
             $this->event,
             $this->queue
         );
@@ -145,22 +146,52 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $eventName = 'command.bar';
 
         Phake::when($this->eventEmitter)
-            ->listeners($eventName)
-            ->thenReturn(array(function(){}));
+                ->listeners($eventName)
+                ->thenReturn(array(function(){}));
 
         $this->plugin->forwardEvent(
-            'foo',
-            'bar',
-            $eventName,
-            $this->event,
-            $this->queue
+                'foo',
+                'bar',
+                $eventName,
+                array(),
+                $this->event,
+                $this->queue
         );
 
         Phake::verify($this->event)->setCustomCommand("bar");
 
         Phake::verify($this->eventEmitter)->emit(
-            $eventName,
-            array($this->event, $this->queue)
+                $eventName,
+                array($this->event, $this->queue)
+        );
+    }
+
+    /**
+     * Tests forwardEvent() with an alias that includes custom parameters.
+     */
+    public function testForwardEventWithCustomParameters()
+    {
+        $eventName = 'command.bar';
+        $customParameters = array('parameter1', 'parameter2');
+
+        Phake::when($this->eventEmitter)
+                ->listeners($eventName)
+                ->thenReturn(array(function(){}));
+
+        $this->plugin->forwardEvent(
+                'foo',
+                'bar',
+                $eventName,
+                $customParameters,
+                $this->event,
+                $this->queue
+        );
+
+        Phake::verify($this->event)->setCustomParams($customParameters);
+
+        Phake::verify($this->eventEmitter)->emit(
+                $eventName,
+                array($this->event, $this->queue)
         );
     }
 
