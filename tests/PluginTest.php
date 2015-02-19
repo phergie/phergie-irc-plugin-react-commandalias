@@ -138,33 +138,61 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ->emit(Phake::anyParameters());
     }
 
-    /**
-     * Tests forwardEvent() with an alias for a recognized command.
-     */
-    public function testForwardEventWithRecognizedCommand()
-    {
-        $eventName = 'command.bar';
+	/**
+	 * Tests forwardEvent() with an alias for a recognized command.
+	 */
+	public function testForwardEventWithRecognizedCommand()
+	{
+		$eventName = 'command.bar';
 
-        Phake::when($this->eventEmitter)
-            ->listeners($eventName)
-            ->thenReturn(array(function(){}));
+		Phake::when($this->eventEmitter)
+				->listeners($eventName)
+				->thenReturn(array(function(){}));
 
-        $this->plugin->forwardEvent(
-            'foo',
-            'bar',
-            $eventName,
-            array(),
-            $this->event,
-            $this->queue
-        );
+		$this->plugin->forwardEvent(
+				'foo',
+				'bar',
+				$eventName,
+				array(),
+				$this->event,
+				$this->queue
+		);
 
-        Phake::verify($this->event)->setCustomCommand("bar");
+		Phake::verify($this->event)->setCustomCommand("bar");
 
-        Phake::verify($this->eventEmitter)->emit(
-            $eventName,
-            array($this->event, $this->queue)
-        );
-    }
+		Phake::verify($this->eventEmitter)->emit(
+				$eventName,
+				array($this->event, $this->queue)
+		);
+	}
+
+	/**
+	 * Tests forwardEvent() with an alias that includes custom parameters.
+	 */
+	public function testForwardEventWithCustomParameters()
+	{
+		$eventName = 'command.bar';
+
+		Phake::when($this->eventEmitter)
+				->listeners($eventName)
+				->thenReturn(array(function(){}));
+
+		$this->plugin->forwardEvent(
+				'foo',
+				'bar',
+				$eventName,
+				array('foo', 'bar'),
+				$this->event,
+				$this->queue
+		);
+
+		Phake::verify($this->event)->setCustomParams(array('foo', 'bar'));
+
+		Phake::verify($this->eventEmitter)->emit(
+				$eventName,
+				array($this->event, $this->queue)
+		);
+	}
 
     /**
      * Tests that getSubscribedEvents() returns an array.
