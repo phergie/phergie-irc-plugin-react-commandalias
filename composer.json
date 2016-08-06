@@ -11,9 +11,9 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "phergie/phergie-irc-bot-react": "^1|^2",
-        "phergie/phergie-irc-plugin-react-command": "^1|^2",
         "php": ">=5.6.0",
+        "phergie/phergie-irc-bot-react": "^1|^2",
+        "phergie/phergie-irc-plugin-react-command": "^1|^2"
     },
     "require-dev": {
         "phergie/phergie-irc-bot-react-development": "^1"
