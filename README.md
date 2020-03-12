@@ -1,3 +1,8 @@
+# This project is abandoned
+
+This repo is being kept for posterity and will be archived in a readonly state. 
+If you're interested it can be forked under a new Composer namespace/GitHub organization.
+
 # phergie/phergie-irc-plugin-react-commandalias
 
 [Phergie](http://github.com/phergie/phergie-irc-bot-react/) plugin for enabling the use of custom aliases for existing bot commands.
